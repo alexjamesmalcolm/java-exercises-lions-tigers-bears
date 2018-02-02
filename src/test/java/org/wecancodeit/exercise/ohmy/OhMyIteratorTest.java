@@ -1,14 +1,11 @@
 package org.wecancodeit.exercise.ohmy;
 
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.hamcrest.collection.IsIterableContainingInAnyOrder;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class OhMyIteratorTest {
