@@ -1,73 +1,75 @@
 package org.wecancodeit.exercise.ohmy;
 
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class OhMyIteratorTest {
 
-	private static final String[] EMPTY_ARRAY = new String[] {};
-	private static final String[] ANIMALS = { "lions", "tigers", "bears" };
-
 	@Test
 	public void shouldReturnFirstElement() {
-		Iterator<String> underTest = new OhMyIterator(new String[] {"lions"});
+		Iterator<String> underTest = new OhMyIterator();
 		
 		String first = underTest.next();
 		
-		Assert.assertEquals("lions", first);
+		assertThat(first, is("lions"));
 	}
 	
 	@Test
 	public void shouldReturnSecondElement()  {
-		Iterator<String> underTest = new OhMyIterator(new String[] {"lions", "tigers"});
+		Iterator<String> underTest = new OhMyIterator();
 		
 		underTest.next();
 		String second = underTest.next();
 		
-		Assert.assertEquals("tigers", second);
+		assertThat(second, is("tigers"));
+	}
+	
+	@Test
+	public void shouldReturnThirdElement()  {
+		Iterator<String> underTest = new OhMyIterator();
+		
+		underTest.next();
+		String second = underTest.next();
+		
+		assertThat(second, is("bears"));
 	}
 	
 	@Test
 	public void shouldHaveNextElement() {
-		Iterator<String> underTest = new OhMyIterator(new String[] {"lions"});
+		Iterator<String> underTest = new OhMyIterator();
 		
 		boolean hasNext = underTest.hasNext();
 		
-		Assert.assertTrue(hasNext);
-		// which is the same as...
-		Assert.assertEquals(true, hasNext);
+		assertThat(hasNext, is(true));
 	}
 	
 	@Test
 	public void shouldNotHaveNextElement() {
-		Iterator<String> underTest = new OhMyIterator(EMPTY_ARRAY);
+		Iterator<String> underTest = new OhMyIterator();
 		
+		underTest.next();
+		underTest.next();
+		underTest.next();
 		boolean hasNext = underTest.hasNext();
 		
-		Assert.assertFalse(hasNext);
-		// which is the same as...
-		Assert.assertEquals(false, hasNext);
+		assertThat(hasNext, is(false));
 	}
 	
 	@Test(expected=NoSuchElementException.class)
 	public void shouldThrowExceptionIfNextIsNotAvailable() {
-		Iterator<String> underTest = new OhMyIterator(EMPTY_ARRAY);
+		Iterator<String> underTest = new OhMyIterator();
+
 		underTest.next();
-	}
-	
-	@Test
-	public void shouldReadAllElements() {
-		Iterator<String> underTest = new OhMyIterator(ANIMALS);
-		
-		String first = underTest.next();
-		String second = underTest.next();
-		String third = underTest.next();
-		
-		Assert.assertEquals("lions", first);
-		Assert.assertEquals("tigers", second);
-		Assert.assertEquals("bears", third);
+		underTest.next();
+		underTest.next();
+		underTest.next();
 	}
 }
