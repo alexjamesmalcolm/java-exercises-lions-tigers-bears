@@ -37,6 +37,7 @@ public class OhMyIteratorTest {
 		Iterator<String> underTest = new OhMyIterator();
 		
 		underTest.next();
+		underTest.next();
 		String second = underTest.next();
 		
 		assertThat(second, is("bears"));
