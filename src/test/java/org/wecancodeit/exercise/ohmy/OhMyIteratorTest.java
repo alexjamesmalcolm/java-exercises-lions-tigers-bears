@@ -57,7 +57,6 @@ public class OhMyIteratorTest {
 		underTest.next();
 		underTest.next();
 		boolean hasNext = underTest.hasNext();
-		
 		assertThat(hasNext, is(false));
 	}
 	
